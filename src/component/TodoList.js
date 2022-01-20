@@ -7,22 +7,25 @@ function TodoList() {
 
     const addTodo = todo => {
         if(!todo.text || /^\s*$/.test(todo.text)) {
-            return
+            return;
         }
 
-        const newTodos = [todo, ...todos]
+        const newTodos = [todo, ...todos];
 
         setTodos(newTodos);
     }
 
     const updateTodo = (todoId, newValue) => {
         if(!newValue.text || /^\s*$/.test(newValue.text)) {
-            return
+            return;
         }
-    }
+
+        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)));
+    };
 
     const removeTodo = id => {
         const removeArr = [...todos].filter(todo => todo.id !== id);
+
         setTodos(removeArr);
     }
 
@@ -37,7 +40,7 @@ function TodoList() {
     }
   return (
   <div>
-      <h1>What's up?</h1>
+      <h1>What's the Plan for Today?</h1>
       <TodoForm onSubmit={addTodo}/>
       <Todo 
       todos={todos}

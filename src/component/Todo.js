@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-// import TodoList from './TodoList';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import TodoForm from './TodoForm';
 
-function Todo({todos, completeTodo, removeTodo, updateTodo}) {
+const Todo = ({todos, completeTodo, removeTodo, updateTodo}) => {
     const [edit, setEdit] = useState({
         id: null,
         value: ''
@@ -15,15 +14,16 @@ function Todo({todos, completeTodo, removeTodo, updateTodo}) {
         setEdit({
             id: null,
             value: ''
-        })
-    }
+        });
+    };
+
     if (edit.id) {
         return <TodoForm edit={edit} onSubmit={submitUpdate} />
-    }
+    };
 
-
-    return todos.map((todo, index) => {
-        <div className={todo.isComplete ? 'todo-row complate' : 'todo-row'} 
+    return todos.map((todo, index) => (
+        <div 
+        className={todo.isComplete ? 'todo-row complate' : 'todo-row'} 
         key={index}>
 
             <div key={todo.id} onClick={() => completeTodo(todo.id)}>
@@ -39,7 +39,7 @@ function Todo({todos, completeTodo, removeTodo, updateTodo}) {
             </div>
 
         </div>
-    })
-}
+    ));
+};
 
 export default Todo;
